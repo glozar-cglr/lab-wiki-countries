@@ -1,8 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+import countries from '../countries.json'
+
 
 export const CountryDetails = ({location, history}) => {
 
-    console.log("queee es esto???", location)
+    console.log("queee es esto???", location);
     return (
         <div style={{width:'100%'}}>
             <h1>{location.state.name.official}</h1>
@@ -26,7 +29,14 @@ export const CountryDetails = ({location, history}) => {
                                 {
                                     location.state.borders.length ? 
                                     location.state.borders.map((item,index) => 
-                                    <li key={index}>{item}</li>
+                                    <li key={index}>
+                                        <Link to={{
+                                            pathname: "/detail",
+                                            state: countries.find(element => item === element.cca3)
+                                        }}>
+                                            {item}
+                                        </Link>
+                                    </li>
                                     ):
                                     <li>No colinda con nada</li>
                                 }
